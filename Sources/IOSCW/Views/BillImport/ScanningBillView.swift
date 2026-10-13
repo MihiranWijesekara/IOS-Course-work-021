@@ -20,7 +20,7 @@ public struct ScanningBillView: View {
                 VStack(spacing: 16) {
                     // Top Header Card
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Scanning bill...")
+                        Text("Scanning bill…")
                             .font(.system(size: 26, weight: .bold))
                             .foregroundColor(.white)
                         
@@ -194,34 +194,43 @@ public struct ScanningBillView: View {
                                 .stroke(EnergyLensTheme.borderSubtle, lineWidth: 1)
                         )
                         
-                        // Status 4: Detected consumption · 180 kWh
-                        HStack(spacing: 12) {
-                            Image(systemName: "doc.text")
-                                .font(.system(size: 20))
-                                .foregroundColor(Color(red: 0.10, green: 0.45, blue: 0.55))
-                                .frame(width: 22)
-                            
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Detected consumption · 180 kWh")
-                                    .font(.system(size: 15, weight: .bold))
+                        // Status 4: Detected consumption · 180 kWh (Tappable to Review Bill)
+                        Button(action: {
+                            navState.navigate(to: .reviewBill)
+                        }) {
+                            HStack(spacing: 12) {
+                                Image(systemName: "doc.badge.checkmark")
+                                    .font(.system(size: 20))
                                     .foregroundColor(Color(red: 0.10, green: 0.45, blue: 0.55))
+                                    .frame(width: 22)
                                 
-                                Text("Not saved yet. Please review after\nrecognition.")
-                                    .font(.system(size: 12, weight: .regular))
-                                    .foregroundColor(EnergyLensTheme.textSecondary)
-                                    .lineSpacing(2)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Detected consumption · 180 kWh")
+                                        .font(.system(size: 15, weight: .bold))
+                                        .foregroundColor(Color(red: 0.10, green: 0.45, blue: 0.55))
+                                    
+                                    Text("Not saved yet. Please review after recognition.")
+                                        .font(.system(size: 12, weight: .regular))
+                                        .foregroundColor(EnergyLensTheme.textSecondary)
+                                        .lineSpacing(2)
+                                        .multilineTextAlignment(.leading)
+                                }
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .foregroundColor(Color(red: 0.10, green: 0.45, blue: 0.55))
                             }
-                            
-                            Spacer()
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 16)
+                            .background(Color(red: 0.93, green: 0.98, blue: 0.96))
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color(red: 0.82, green: 0.94, blue: 0.88), lineWidth: 1)
+                            )
                         }
-                        .padding(.vertical, 14)
-                        .padding(.horizontal, 16)
-                        .background(Color(red: 0.93, green: 0.98, blue: 0.96))
-                        .cornerRadius(12)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color(red: 0.82, green: 0.94, blue: 0.88), lineWidth: 1)
-                        )
                     }
                     .padding(.bottom, 24)
                 }

@@ -19,23 +19,23 @@ public struct AnalysisView: View {
                     // Header Card
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Analysis")
-                            .font(.system(size: 26, weight: .bold))
+                            .font(.system(size: 28, weight: .bold))
                             .foregroundColor(.white)
                         
                         Text("See where your energy goes, and what comes\nnext.")
-                            .font(.system(size: 14, weight: .regular))
+                            .font(.system(size: 15, weight: .regular))
                             .foregroundColor(.white.opacity(0.92))
                             .lineSpacing(2)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(20)
                     .background(EnergyLensTheme.cardGradient)
-                    .cornerRadius(18)
+                    .cornerRadius(20)
                     .shadow(color: Color.black.opacity(0.12), radius: 10, x: 0, y: 5)
                     
                     // Section 1: Your household
                     Text("Your household")
-                        .font(.system(size: 18, weight: .bold))
+                        .font(.system(size: 19, weight: .bold))
                         .foregroundColor(EnergyLensTheme.textPrimary)
                         .padding(.top, 6)
                     
@@ -45,7 +45,8 @@ public struct AnalysisView: View {
                             iconBg: EnergyLensTheme.iconGreenBg,
                             title: "Bill Analysis",
                             subtitle: "Import and understand your electricity\nbill",
-                            showDivider: true
+                            showDivider: true,
+                            isHighlighted: false
                         ) {
                             navState.navigate(to: .billAnalysis)
                         }
@@ -55,24 +56,34 @@ public struct AnalysisView: View {
                             iconBg: EnergyLensTheme.iconOrangeBg,
                             title: "Consumption Breakdown",
                             subtitle: "Estimated usage by appliance category",
-                            showDivider: true
-                        ) {}
+                            showDivider: true,
+                            isHighlighted: false
+                        ) {
+                            navState.navigate(to: .consumptionBreakdown)
+                        }
                         
                         analysisRow(
                             icon: "powerplug.fill",
                             iconBg: EnergyLensTheme.iconPurpleBg,
                             title: "Appliances",
                             subtitle: "Manage power ratings and usage profiles",
-                            showDivider: true
-                        ) {}
+                            showDivider: true,
+                            isHighlighted: false
+                        ) {
+                            navState.navigate(to: .appliances)
+                        }
                         
+                        // Next Month Prediction - Highlighted row matching Page 7
                         analysisRow(
                             icon: "chart.line.uptrend.xyaxis",
                             iconBg: EnergyLensTheme.iconTealBg,
                             title: "Next Month Prediction",
                             subtitle: "Updated forecast · 195 kWh",
-                            showDivider: false
-                        ) {}
+                            showDivider: false,
+                            isHighlighted: true
+                        ) {
+                            navState.navigate(to: .nextMonthPrediction)
+                        }
                     }
                     .background(Color.white)
                     .cornerRadius(16)
@@ -83,7 +94,7 @@ public struct AnalysisView: View {
                     
                     // Section 2: Explore scenarios
                     Text("Explore scenarios")
-                        .font(.system(size: 18, weight: .bold))
+                        .font(.system(size: 19, weight: .bold))
                         .foregroundColor(EnergyLensTheme.textPrimary)
                         .padding(.top, 10)
                     
@@ -93,16 +104,22 @@ public struct AnalysisView: View {
                             iconBg: EnergyLensTheme.iconGreenBg,
                             title: "Energy Saving Simulator",
                             subtitle: "Test a change in the Savings tab",
-                            showDivider: true
-                        ) {}
+                            showDivider: true,
+                            isHighlighted: false
+                        ) {
+                            navState.navigate(to: .savingsSimulator)
+                        }
                         
                         analysisRow(
                             icon: "sun.max.fill",
                             iconBg: EnergyLensTheme.iconAmberBg,
                             title: "Solar Analysis",
                             subtitle: "Explore Solar generation scenario",
-                            showDivider: false
-                        ) {}
+                            showDivider: false,
+                            isHighlighted: false
+                        ) {
+                            navState.navigate(to: .solarAnalysis)
+                        }
                     }
                     .background(Color.white)
                     .cornerRadius(16)
@@ -113,7 +130,7 @@ public struct AnalysisView: View {
                     
                     // Footnote
                     Text("August 2025 bill is the basis for your current analysis.\nEstimates are not live meter readings.")
-                        .font(.system(size: 12, weight: .regular))
+                        .font(.system(size: 13, weight: .regular))
                         .foregroundColor(EnergyLensTheme.textSecondary)
                         .lineSpacing(2)
                         .padding(.top, 4)
@@ -124,8 +141,15 @@ public struct AnalysisView: View {
             
             // Bottom Tab Navigation Bar
             CustomTabBar(selectedTab: $navState.selectedTab) { tab in
-                if tab == .home {
+                switch tab {
+                case .home:
                     navState.navigate(to: .home)
+                case .analysis:
+                    navState.navigate(to: .analysis)
+                case .savings:
+                    navState.navigate(to: .savingsSimulator)
+                case .profile:
+                    navState.navigate(to: .profile)
                 }
             }
         }
@@ -139,6 +163,7 @@ public struct AnalysisView: View {
         title: String,
         subtitle: String,
         showDivider: Bool,
+        isHighlighted: Bool,
         action: @escaping () -> Void
     ) -> some View {
         Button(action: action) {
@@ -163,6 +188,7 @@ public struct AnalysisView: View {
                             .font(.system(size: 12, weight: .regular))
                             .foregroundColor(EnergyLensTheme.textSecondary)
                             .lineLimit(2)
+                            .multilineTextAlignment(.leading)
                     }
                     
                     Spacer()
@@ -173,6 +199,7 @@ public struct AnalysisView: View {
                 }
                 .padding(.vertical, 14)
                 .padding(.horizontal, 16)
+                .background(isHighlighted ? EnergyLensTheme.mintHighlight : Color.white)
                 
                 if showDivider {
                     Divider()

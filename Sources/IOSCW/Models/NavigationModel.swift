@@ -11,6 +11,29 @@ public enum AppScreen: String, CaseIterable, Identifiable {
     case billAnalysis = "8. Bill Analysis"
     case selectBillImage = "9. Select Bill"
     case scanningBill = "10. Scanning Bill"
+    case reviewBill = "11. Review Bill"
+    case billAnalysisResult = "12. Analysis Result"
+    case billHistory = "13. Bill History"
+    case consumptionBreakdown = "14. Breakdown"
+    case appliances = "15. Appliances"
+    case addAppliance = "16. Add Appliance"
+    case applianceDetail = "17. Appliance Detail"
+    case weatherDetails = "18. Weather Details"
+    case nextMonthPrediction = "19. Prediction"
+    case whyThisPrediction = "20. Why Prediction"
+    case savingsSimulator = "21. Savings Simulator"
+    case simulationResult = "22. Simulation Result"
+    case addScenarioModal = "23. Add Scenario"
+    case solarAnalysis = "24. Solar Analysis"
+    case profile = "25. Profile"
+    case notifications = "26. Notifications"
+    case billHistoryEmpty = "27. Bill History (Empty)"
+    case appliancesEmpty = "28. Appliances (Empty)"
+    case notificationsEmpty = "29. Notifications (Empty)"
+    case predictionEmpty = "30. Prediction (Empty)"
+    case weatherError = "31. Weather (Offline)"
+    case billScanError = "32. Bill (Unreadable)"
+    case homeSkeleton = "33. Home (Loading)"
     
     public var id: String { rawValue }
     
@@ -26,6 +49,29 @@ public enum AppScreen: String, CaseIterable, Identifiable {
         case .billAnalysis: return 8
         case .selectBillImage: return 9
         case .scanningBill: return 10
+        case .reviewBill: return 11
+        case .billAnalysisResult: return 12
+        case .billHistory: return 13
+        case .consumptionBreakdown: return 14
+        case .appliances: return 15
+        case .addAppliance: return 16
+        case .applianceDetail: return 17
+        case .weatherDetails: return 18
+        case .nextMonthPrediction: return 19
+        case .whyThisPrediction: return 20
+        case .savingsSimulator: return 21
+        case .simulationResult: return 22
+        case .addScenarioModal: return 23
+        case .solarAnalysis: return 24
+        case .profile: return 25
+        case .notifications: return 26
+        case .billHistoryEmpty: return 27
+        case .appliancesEmpty: return 28
+        case .notificationsEmpty: return 29
+        case .predictionEmpty: return 30
+        case .weatherError: return 31
+        case .billScanError: return 32
+        case .homeSkeleton: return 33
         }
     }
 }
@@ -53,14 +99,23 @@ public final class AppNavigationState: ObservableObject {
     @Published public var enteredPasscode: String = ""
     @Published public var isAuthenticated: Bool = false
     
+    // Bill Data and Simulator State
+    @Published public var selectedAppliance: String = "Air Conditioner"
+    @Published public var simulationHours: Double = 4.0
+    @Published public var currentAcHours: Double = 6.0
+    
     public init() {}
     
     public func navigate(to screen: AppScreen) {
         currentScreen = screen
-        if screen == .home {
+        if screen == .home || screen == .homeSkeleton {
             selectedTab = .home
-        } else if screen == .analysis {
+        } else if screen == .analysis || screen == .consumptionBreakdown || screen == .appliances || screen == .nextMonthPrediction || screen == .solarAnalysis {
             selectedTab = .analysis
+        } else if screen == .savingsSimulator || screen == .simulationResult {
+            selectedTab = .savings
+        } else if screen == .profile {
+            selectedTab = .profile
         }
     }
 }

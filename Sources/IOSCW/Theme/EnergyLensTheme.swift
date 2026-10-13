@@ -39,8 +39,8 @@ public enum EnergyLensTheme {
     )
 
     // Solid Colors
-    public static let splashBackground = Color(red: 0.71, green: 0.93, blue: 0.80) // #B5EDCC Mint Green
-    public static let screenBackground = Color(red: 0.98, green: 0.98, blue: 0.99) // #FAFAFC Crisp light background
+    public static let splashBackground = Color(red: 0.65, green: 0.94, blue: 0.78) // #A6F0C7 Mint Green
+    public static let screenBackground = Color(red: 0.97, green: 0.97, blue: 0.99) // #F8F8FC Crisp light background
     public static let cardBackground = Color.white
     
     public static let accentGreen = Color(red: 0.09, green: 0.53, blue: 0.31)      // #17874F Active Green
@@ -59,4 +59,19 @@ public enum EnergyLensTheme {
     public static let iconPurpleBg = Color(red: 0.56, green: 0.38, blue: 0.79)    // #8F61C9
     public static let iconTealBg = Color(red: 0.11, green: 0.58, blue: 0.59)      // #1C9496
     public static let iconAmberBg = Color(red: 0.88, green: 0.53, blue: 0.19)     // #E08730
+
+    // Additional theme colors matching PDF specifications
+    public static let darkNavyCard = Color(red: 0.07, green: 0.19, blue: 0.31)    // #12314F Deep Navy Blue
+    public static let alertYellowBg = Color(red: 0.99, green: 0.95, blue: 0.78)   // #FEF3C7 Soft Amber
+    public static let alertYellowBorder = Color(red: 0.97, green: 0.89, blue: 0.63) // #F7E3A1
+    public static let alertYellowText = Color(red: 0.58, green: 0.40, blue: 0.05) // #94660D
+    
+    public static let infoSkyBlueBg = Color(red: 0.78, green: 0.91, blue: 0.99)   // #C7E8FD Sky Blue
+    public static let infoSkyBlueText = Color(red: 0.07, green: 0.34, blue: 0.46) // #125775
+    
+    public static let purpleCardBg = Color(red: 0.93, green: 0.91, blue: 0.99)    // #EDE8FC Soft Lavender
+    public static let purpleText = Color(red: 0.38, green: 0.24, blue: 0.65)      // #613DA6
+    
+    public static let mintHighlight = Color(red: 0.90, green: 0.98, blue: 0.93)   // #E6F9ED Soft Mint
+    public static let logoSkyBlue = Color(red: 0.75, green: 0.89, blue: 0.99)     // #C0E3FD
 }

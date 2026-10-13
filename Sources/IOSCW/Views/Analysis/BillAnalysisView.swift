@@ -20,10 +20,10 @@ public struct BillAnalysisView: View {
                     // Headings
                     VStack(alignment: .leading, spacing: 6) {
                         Text("Bill Analysis")
-                            .font(.system(size: 28, weight: .bold))
+                            .font(.system(size: 30, weight: .bold))
                             .foregroundColor(EnergyLensTheme.textPrimary)
                         
-                        Text("Turn your electricity bill into a clearer picture of your household energy.")
+                        Text("Turn your electricity bill into a clearer picture of\nyour household energy.")
                             .font(.system(size: 15, weight: .regular))
                             .foregroundColor(EnergyLensTheme.textSecondary)
                             .lineSpacing(2)
@@ -39,49 +39,53 @@ public struct BillAnalysisView: View {
                             .font(.system(size: 18, weight: .bold))
                             .foregroundColor(.white)
                         
-                        Text("Choose a bill image. Vision Framework recognises the text and extracts your billing period, readings and amount.")
+                        Text("Choose a bill image. Vision Framework\nrecognises the text and extracts your\nbilling period, readings and amount.")
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white.opacity(0.92))
                             .lineSpacing(2)
                         
-                        Text("You review and edit the values before they are used in your analysis.")
+                        Text("You review and edit the values before they are\nused in your analysis.")
                             .font(.system(size: 13, weight: .regular))
-                            .foregroundColor(.white.opacity(0.75))
+                            .foregroundColor(.white.opacity(0.78))
                             .lineSpacing(2)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(22)
                     .background(EnergyLensTheme.cardGradient)
-                    .cornerRadius(18)
+                    .cornerRadius(20)
                     .shadow(color: Color.black.opacity(0.12), radius: 10, x: 0, y: 5)
                     
                     // Section: Most recent bill
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Most recent bill")
-                            .font(.system(size: 17, weight: .bold))
+                            .font(.system(size: 18, weight: .bold))
                             .foregroundColor(EnergyLensTheme.textPrimary)
                         
-                        HStack(alignment: .center) {
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text("August 2025")
+                        Button(action: {
+                            navState.navigate(to: .billAnalysisResult)
+                        }) {
+                            HStack(alignment: .center) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("August 2025")
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(Color(red: 0.12, green: 0.38, blue: 0.28))
+                                    
+                                    Text("01 Aug – 31 Aug · 180 kWh")
+                                        .font(.system(size: 13, weight: .regular))
+                                        .foregroundColor(EnergyLensTheme.textSecondary)
+                                }
+                                
+                                Spacer()
+                                
+                                Text("LKR 7,850")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(Color(red: 0.12, green: 0.38, blue: 0.28))
-                                
-                                Text("01 Aug – 31 Aug · 180 kWh")
-                                    .font(.system(size: 13, weight: .regular))
-                                    .foregroundColor(EnergyLensTheme.textSecondary)
                             }
-                            
-                            Spacer()
-                            
-                            Text("LKR 7,850")
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(Color(red: 0.12, green: 0.38, blue: 0.28))
+                            .padding(.vertical, 16)
+                            .padding(.horizontal, 18)
+                            .background(EnergyLensTheme.mintHighlight)
+                            .cornerRadius(14)
                         }
-                        .padding(.vertical, 16)
-                        .padding(.horizontal, 18)
-                        .background(Color(red: 0.90, green: 0.97, blue: 0.93))
-                        .cornerRadius(14)
                     }
                     .padding(.top, 6)
                     
@@ -94,7 +98,7 @@ public struct BillAnalysisView: View {
                         }
                         
                         OutlineButton(title: "View Bill History") {
-                            // View bill history action
+                            navState.navigate(to: .billHistory)
                         }
                     }
                     .padding(.bottom, 24)

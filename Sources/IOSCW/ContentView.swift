@@ -8,7 +8,7 @@ public struct ContentView: View {
     
     public var body: some View {
         ZStack(alignment: .bottom) {
-            // Main Active Screen
+            // Main Active Screen (all 33 screens from PDF specification)
             Group {
                 switch navState.currentScreen {
                 case .splash:
@@ -31,16 +31,62 @@ public struct ContentView: View {
                     SelectBillImageView()
                 case .scanningBill:
                     ScanningBillView()
+                case .reviewBill:
+                    ReviewBillView()
+                case .billAnalysisResult:
+                    BillAnalysisResultView()
+                case .billHistory:
+                    BillHistoryView()
+                case .consumptionBreakdown:
+                    ConsumptionBreakdownView()
+                case .appliances:
+                    AppliancesView()
+                case .addAppliance:
+                    AddApplianceView()
+                case .applianceDetail:
+                    ApplianceDetailView()
+                case .weatherDetails:
+                    WeatherDetailsView()
+                case .nextMonthPrediction:
+                    NextMonthPredictionView()
+                case .whyThisPrediction:
+                    WhyThisPredictionView()
+                case .savingsSimulator:
+                    SavingsSimulatorView()
+                case .simulationResult:
+                    SimulationResultView()
+                case .addScenarioModal:
+                    AddScenarioModalView()
+                case .solarAnalysis:
+                    SolarAnalysisView()
+                case .profile:
+                    ProfileView()
+                case .notifications:
+                    NotificationsView()
+                case .billHistoryEmpty:
+                    BillHistoryEmptyView()
+                case .appliancesEmpty:
+                    AppliancesEmptyView()
+                case .notificationsEmpty:
+                    NotificationsEmptyView()
+                case .predictionEmpty:
+                    PredictionEmptyView()
+                case .weatherError:
+                    WeatherErrorView()
+                case .billScanError:
+                    BillScanErrorView()
+                case .homeSkeleton:
+                    HomeSkeletonView()
                 }
             }
             .environmentObject(navState)
             
-            // Floating Quick Screen Switcher (For testing all 10 PDF pages seamlessly)
+            // Floating Quick Screen Switcher (For testing all 33 PDF pages directly)
             VStack(spacing: 0) {
                 if showScreenPicker {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
-                            Text("EnergyLens PDF Screen Navigator")
+                            Text("EnergyLens 33-Screen PDF Navigator")
                                 .font(.system(size: 13, weight: .bold))
                                 .foregroundColor(.white)
                             Spacer()
@@ -72,9 +118,9 @@ public struct ContentView: View {
                         }
                     }
                     .padding(12)
-                    .background(Color(red: 0.1, green: 0.15, blue: 0.2).opacity(0.95))
+                    .background(Color(red: 0.08, green: 0.12, blue: 0.18).opacity(0.96))
                     .cornerRadius(16)
-                    .shadow(radius: 10)
+                    .shadow(radius: 12)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 8)
                 }
@@ -86,12 +132,12 @@ public struct ContentView: View {
                         HStack(spacing: 6) {
                             Image(systemName: "square.grid.2x2")
                                 .font(.system(size: 12, weight: .semibold))
-                            Text("Page \(navState.currentScreen.screenNumber)/10")
+                            Text("Page \(navState.currentScreen.screenNumber)/33")
                                 .font(.system(size: 12, weight: .semibold))
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(Color.black.opacity(0.75))
+                        .background(Color.black.opacity(0.78))
                         .foregroundColor(.white)
                         .clipShape(Capsule())
                         .shadow(radius: 4)
